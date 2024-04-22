@@ -2,7 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<spring:eval expression="@OauthProperties['KAKAO_JavaScript_KEY']" var="KakaoApiKey"/>
+<%--<spring:eval expression="@OauthProperties['KAKAO_JavaScript_KEY']" var="KakaoApiKey"/>--%>
 <html>
 <head>
     <title>roomDetail</title>
@@ -516,13 +516,13 @@
         </div>
     </div>
     <%--  section-6  --%>
-    <div class="screens-room-roomDetail__section-6 screens-room-roomDetail__padding-content">
-        <div class="screens-room-roomDetail__font-title screens-room-roomDetail__hosting-region">호스팅
-            지역
-        </div>
-        <div class="screens-room-roomDetail__map"></div>
-        <div class="screens-room-roomDetail__map-region">${room.room_address}</div>
-    </div>
+<%--    <div class="screens-room-roomDetail__section-6 screens-room-roomDetail__padding-content">--%>
+<%--        <div class="screens-room-roomDetail__font-title screens-room-roomDetail__hosting-region">호스팅--%>
+<%--            지역--%>
+<%--        </div>--%>
+<%--        <div class="screens-room-roomDetail__map"></div>--%>
+<%--        <div class="screens-room-roomDetail__map-region">${room.room_address}</div>--%>
+<%--    </div>--%>
     <%--  section-7  --%>
     <div class="screens-room-roomDetail__section-7 screens-room-roomDetail__padding-content">
         <div class="screens-room-roomDetail__section-7__host-profile">
@@ -572,8 +572,8 @@
 <jsp:include page="/WEB-INF/views/common/user/footerNotFix.jsp"/>
 
 <%--<!-- 카카오 지도 API : services 라이브러리 불러오기 -->--%>
-<script type="text/javascript"
-        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${KakaoApiKey}&libraries=services"></script>
+<%--<script type="text/javascript"--%>
+<%--        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${KakaoApiKey}&libraries=services"></script>--%>
 <%-- 스크립트 --%>
 <script>
     const roomAddress = '${room.room_address}';
@@ -591,35 +591,35 @@
 <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.16.0/moment.min.js"></script>
 <%--    <script src="/resources/js/room/roomDetail.js"></script>--%>
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<%--<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>--%>
 
-<script>
-    // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
-    Kakao.init('${KakaoApiKey}');
+<%--<script>--%>
+<%--    // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.--%>
+<%--    Kakao.init('${KakaoApiKey}');--%>
 
-    function kakaoShare() {
-        Kakao.Link.sendDefault({
-            objectType: 'feed',
-            content: {
-                title: '${room.room_name}',
-                description: `${room.room_total_desc}`,
-                imageUrl: '${roomImg.room_img_url}',
-                link: {
-                    webUrl: 'localhost:8080/room/roomDetail?room_id=${room.room_id}',
-                },
-            },
-            buttons: [
-                {
-                    title: '웹으로 보기',
-                    link: {
-                        webUrl: 'localhost:8080/room/roomDetail?room_id=${room.room_id}',
-                    },
-                },
-            ],
-        })
-    }
+<%--    function kakaoShare() {--%>
+<%--        Kakao.Link.sendDefault({--%>
+<%--            objectType: 'feed',--%>
+<%--            content: {--%>
+<%--                title: '${room.room_name}',--%>
+<%--                description: `${room.room_total_desc}`,--%>
+<%--                imageUrl: '${roomImg.room_img_url}',--%>
+<%--                link: {--%>
+<%--                    webUrl: 'localhost:8080/room/roomDetail?room_id=${room.room_id}',--%>
+<%--                },--%>
+<%--            },--%>
+<%--            buttons: [--%>
+<%--                {--%>
+<%--                    title: '웹으로 보기',--%>
+<%--                    link: {--%>
+<%--                        webUrl: 'localhost:8080/room/roomDetail?room_id=${room.room_id}',--%>
+<%--                    },--%>
+<%--                },--%>
+<%--            ],--%>
+<%--        })--%>
+<%--    }--%>
 
-</script>
+<%--</script>--%>
 
 <script>
     $(document).ready(function () {
