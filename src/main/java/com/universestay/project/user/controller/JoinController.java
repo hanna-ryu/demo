@@ -33,7 +33,9 @@ public class JoinController {
     @PostMapping("/join")
     public ResponseEntity<Integer> join(@RequestBody UserDto userDto) {
         try {
+            System.out.println(userDto);
             if (joinService.registerUser(userDto) != 1) {
+                System.out.println(joinService.registerUser(userDto));
                 throw new RuntimeException("등록 실패");
             }
         } catch (Exception e) {
@@ -44,48 +46,48 @@ public class JoinController {
     }
 
     // 닉네임 중복체크
-    @PostMapping("/checkNickname")
-    public ResponseEntity<String> checkId(@RequestParam("user_nickname") String user_nickname) {
-        try {
-            if (joinService.checkNickname(user_nickname) != 1) {
-                return ResponseEntity.ok("N");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Y");
-    }
+//    @PostMapping("/checkNickname")
+//    public ResponseEntity<String> checkId(@RequestParam("user_nickname") String user_nickname) {
+//        try {
+//            if (joinService.checkNickname(user_nickname) != 1) {
+//                return ResponseEntity.ok("N");
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            throw new RuntimeException(e);
+//        }
+//        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Y");
+//    }
 
     // 이메일 인증
-    @GetMapping("/mailCheck")
-    public ResponseEntity<String> mailCheck(String email) {
-        try {
-            if (joinService.checkEmail(email) != 1) {
-                code = Integer.parseInt(mailSendService.joinEmail(email));
-                return ResponseEntity.ok("Y");
-            } else {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("N");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("N");
-        }
-    }
+//    @GetMapping("/mailCheck")
+//    public ResponseEntity<String> mailCheck(String email) {
+//        try {
+//            if (joinService.checkEmail(email) != 1) {
+//                code = Integer.parseInt(mailSendService.joinEmail(email));
+//                return ResponseEntity.ok("Y");
+//            } else {
+//                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("N");
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("N");
+//        }
+//    }
 
     // 이메일 인증번호 확인
-    @PostMapping("/checkMailCode")
-    public ResponseEntity<String> checkMailCode(String inputCode) {
-        try {
-
-            if (code == Integer.parseInt(inputCode)) {
-                return ResponseEntity.ok("Y");
-            } else {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("N");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("N");
-        }
-    }
+//    @PostMapping("/checkMailCode")
+//    public ResponseEntity<String> checkMailCode(String inputCode) {
+//        try {
+//
+//            if (code == Integer.parseInt(inputCode)) {
+//                return ResponseEntity.ok("Y");
+//            } else {
+//                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("N");
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("N");
+//        }
+//    }
 }

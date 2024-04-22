@@ -5,25 +5,24 @@
 <mapper namespace="com.universestay.project.user.dao.UserJoinDao">
 
   <insert id="insertUser" parameterType="UserDto">
-    insert into User (user_id, user_nickname, user_pwd, user_name, user_email, user_phone_num1,
-                      user_phone_num2, user_address, user_birth, status_id,
-                      created_id, updated_id)
-    values (#{user_id}, #{user_nickname}, #{user_pwd}, #{user_name}, #{user_email},
-            #{user_phone_num1}, #{user_phone_num2}, #{user_address}, #{user_birth},
-            #{status_id}, #{created_id}, #{updated_id})
+    insert into User (user_id, user_name, user_email, user_phone_num1,
+                      status_id
+                    )
+    values (#{user_id},  #{user_name}, #{user_email},
+            #{user_phone_num1}, #{status_id})
   </insert>
 
-  <select id="checkId" parameterType="String" resultType="int">
-    select count(*)
-    from User
-    where user_nickname = #{user_nickname}
-  </select>
+<!--  <select id="checkId" parameterType="String" resultType="int">-->
+<!--    select count(*)-->
+<!--    from User-->
+<!--    where user_nickname = #{user_nickname}-->
+<!--  </select>-->
 
-  <select id="checkEmail" parameterType="String" resultType="int">
-    select count(*)
-    from User
-    where user_email = #{user_email}
-  </select>
+<!--  <select id="checkEmail" parameterType="String" resultType="int">-->
+<!--    select count(*)-->
+<!--    from User-->
+<!--    where user_email = #{user_email}-->
+<!--  </select>-->
 
 </mapper>
 

@@ -6,7 +6,7 @@ public interface UserJoinDao {
 
     int insertUser(UserDto userDto) throws Exception;
 
-    int checkNickname(String user_nickname) throws Exception;
+//    int checkNickname(String user_nickname) throws Exception;
 
-    int checkEmail(String user_email) throws Exception;
+//    int checkEmail(String user_email) throws Exception;
 }

@@ -14,6 +14,7 @@ public class UserJoinDaoImpl implements UserJoinDao {
 
     @Override
     public int insertUser(UserDto userDto) {
+        System.out.println("insertUser: " + userDto);
         try {
             return session.insert(namespace + "insertUser", userDto);
         } catch (Exception e) {
@@ -21,15 +22,15 @@ public class UserJoinDaoImpl implements UserJoinDao {
         }
     }
 
-    @Override
-    public int checkNickname(String user_nickname) throws Exception {
-        return session.selectOne(namespace + "checkId", user_nickname);
-    }
-
-    @Override
-    public int checkEmail(String user_email) throws Exception {
-        return session.selectOne(namespace + "checkEmail", user_email);
-    }
+//    @Override
+//    public int checkNickname(String user_nickname) throws Exception {
+//        return session.selectOne(namespace + "checkId", user_nickname);
+//    }
+//
+//    @Override
+//    public int checkEmail(String user_email) throws Exception {
+//        return session.selectOne(namespace + "checkEmail", user_email);
+//    }
 
 
 }
