@@ -76,10 +76,10 @@ public class UserLoginServiceImpl implements UserLoginService, PasswordEncryptio
                 String userId = userInfo.getUser_id();
 
                 // 암호화된 비밀번호로 바꿔주기
-                String encrypt_pwd = encrypt(user_email, user_pwd);
+                String entered_pwd = user_pwd;
 
                 // 3. 로그인이 문제없이 성공한 경우
-                if (userEmail != null && encrypt_pwd.equals(userPwd)) {
+                if (userEmail != null && entered_pwd.equals(userPwd)) {
 
                     // 회원 정지 상태 또는 탈퇴 상태가 아니라면
                     if (statusId.equals("U03") || statusId.equals("U04")) {
