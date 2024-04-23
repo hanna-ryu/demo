@@ -6,10 +6,10 @@
 
   <insert id="insertUser" parameterType="UserDto">
     insert into User (user_id, user_name, user_email, user_phone_num1,
-                      status_id
+                      status_id, user_pwd
                     )
     values (#{user_id},  #{user_name}, #{user_email},
-            #{user_phone_num1}, #{status_id})
+            #{user_phone_num1}, #{status_id}, #{user_pwd})
   </insert>
 
 <!--  <select id="checkId" parameterType="String" resultType="int">-->

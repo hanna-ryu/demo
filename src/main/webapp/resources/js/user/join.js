@@ -61,7 +61,7 @@ $(document).ready(function () {
 
             // 사용자가 입력한 정보
             // const user_nickname = $("#screens-user-join_signup_id").val();
-            // const user_pwd = $("#screens-user-join_signup_pw").val();
+            const user_pwd = $("#screens-user-join_signup_pw").val();
             // const user_confirmPassword = $(
             //         "#screens-user-join_signup_pww").val();
             const user_name = $("#screens-user-join_signup_name").val();
@@ -84,7 +84,7 @@ $(document).ready(function () {
             // 서버로 전송할 데이터를 객체
             const userDto = {
                 // user_nickname: user_nickname,
-                // user_pwd: user_pwd,
+                user_pwd: user_pwd,
                 user_name: user_name,
                 // user_birth: new Date(user_birthYear, user_birthMonth - 1,
                 //         user_birthDay),
@@ -186,13 +186,13 @@ function fnSubmit() {
     //     return false;
     // }
 
-    // if ($("#screens-user-join_signup_pw").val() == null || $(
-    //         "screens-user-join_signup_pw").val() == "") {
-    //     alert("비밀번호를 입력해주세요.");
-    //     $("#screens-user-join_signup_pw").focus();
-    //
-    //     return false;
-    // }
+    if ($("#screens-user-join_signup_pw").val() == null || $(
+            "screens-user-join_signup_pw").val() == "") {
+        alert("비밀번호를 입력해주세요.");
+        $("#screens-user-join_signup_pw").focus();
+
+        return false;
+    }
 
     // if ($("#screens-user-join_signup_pww").val() == null || $(
     //         "#screens-user-join_signup_pww").val() == "") {

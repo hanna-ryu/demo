@@ -82,16 +82,16 @@
 <%--                </span>--%>
 <%--        </div>--%>
 
-<%--        <h5 class="screens-user-join_h5" style="margin-top:30px;">비밀번호*</h5>--%>
-<%--        <span class="screens-user-join_signup_input">--%>
+        <h5 class="screens-user-join_h5" style="margin-top:30px;">비밀번호*</h5>
+        <span class="screens-user-join_signup_input">
 
-<%--            <input type="password" id="screens-user-join_signup_pw" placeholder="비밀번호"--%>
-<%--                   class="screens-user-join_input"--%>
-<%--                   value="" maxlength="20" autocomplete="new-password" aria-autocomplete="list">--%>
-<%--            <span class="screens-user-join_pw_lock"></span>--%>
-<%--        </span>--%>
-<%--        <span class="screens-user-join_helper_text_span"--%>
-<%--              id="pwd_input_first_helper_text"></span>--%>
+            <input type="password" id="screens-user-join_signup_pw" placeholder="비밀번호"
+                   class="screens-user-join_input"
+                   value="" maxlength="20" autocomplete="new-password" aria-autocomplete="list">
+            <span class="screens-user-join_pw_lock"></span>
+        </span>
+        <span class="screens-user-join_helper_text_span"
+              id="pwd_input_first_helper_text"></span>
 
 <%--        <h5 class="screens-user-join_h5" style="margin-top: 25px;">비밀번호 재확인*</h5>--%>
 <%--        <span class="screens-user-join_signup_input">--%>
