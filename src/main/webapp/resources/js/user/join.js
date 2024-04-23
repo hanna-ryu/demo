@@ -57,7 +57,6 @@ let dropdown = document.querySelector('.screens-user-join_dropdown');
 $(document).ready(function () {
     // 가입하기 버튼 클릭 이벤트
     $("#screens-user-join_signup_btn").click(function () {
-        alert("작동하나?")
         if (fnSubmit()) {
 
             // 사용자가 입력한 정보
@@ -104,7 +103,6 @@ $(document).ready(function () {
                 data: JSON.stringify(userDto),
                 success: function (response) {
                     if (response == 1) {
-                        console.log("되나?");
                         alert("회원가입에 성공하였습니다.");
                         location.href = "/user/loginForm";
                     } else {

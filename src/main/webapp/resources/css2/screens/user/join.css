@@ -213,7 +213,7 @@ screens-user-join_h5 {
 
 /*회원가입버튼*/
 #screens-user-join_signup_btn {
-  width: 100px;
+  width: 100%;
   height: 100%;
   background-color: #F48475;
   border: none;

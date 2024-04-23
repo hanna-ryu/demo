@@ -33,9 +33,7 @@ public class JoinController {
     @PostMapping("/join")
     public ResponseEntity<Integer> join(@RequestBody UserDto userDto) {
         try {
-            System.out.println(userDto);
             if (joinService.registerUser(userDto) != 1) {
-                System.out.println(joinService.registerUser(userDto));
                 throw new RuntimeException("등록 실패");
             }
         } catch (Exception e) {

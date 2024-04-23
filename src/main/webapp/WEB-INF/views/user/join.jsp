@@ -49,7 +49,7 @@
     <section>
 
         <!--이메일, 비번, 비번재확인-->
-        <h5 class="screens-user-join_h5" style="margin-bottom: 0px;">본인 확인 이메일*</h5>
+        <h5 class="screens-user-join_h5" style="margin-bottom: 0px;">이메일*</h5>
         <div style="display: flex;">
                 <span class="screens-user-join_signup_input"
                       style="width:100%; margin: 10px 0px 0px 0px">
