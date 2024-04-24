@@ -37,10 +37,11 @@ submitButton.addEventListener("click", function (ev) {
         success: function (res) {
             console.log(res + "성공");
             alert("예약 완료.");
-            location.href =
-                    `/room/book/share/${roomId}` +
-                    `?booking_checkin_date=${bookingDto.booking_checkin_date}&booking_checkout_date=${bookingDto.booking_checkout_date}&booking_num_of_guest=${bookingDto.booking_num_of_guest}
-                    &booking_total_pay_amount=${bookingDto.booking_total_pay_amount}&profile_img_url=${profile_img_url}`;
+//            location.href =
+//                    `/room/book/share/${roomId}` +
+//                    `?booking_checkin_date=${bookingDto.booking_checkin_date}&booking_checkout_date=${bookingDto.booking_checkout_date}&booking_num_of_guest=${bookingDto.booking_num_of_guest}
+//                    &booking_total_pay_amount=${bookingDto.booking_total_pay_amount}&profile_img_url=${profile_img_url}`;
+            location.href = "/user/myPage/mybookings";
         },
         error: function (res) {
             console.log(res + " 에러 발생");
