@@ -23,12 +23,12 @@
 .screens-user-userInfo__input {
   border: none;
   border-bottom: 0.3px gray solid;
-  outline-color: #F48475;
+  outline-color: #F6872D;
 }
 
 
 .screens-user-userInfo__button:hover {
-  background-color: #F48475
+  background-color: #F6872D
 }
 
 .screens-user-userInfo__body {
@@ -303,7 +303,7 @@
   resize: none;
   border: 0.5px gray solid;
   border-radius: 3px;
-  outline-color: #F48475;
+  outline-color: #F6872D;
 }
 
 

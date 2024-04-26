@@ -162,13 +162,13 @@ element.style {
 .daterangepicker .drp-buttons .btn {
   border: none;
   border-radius: 10px;
-  background-color: #F48475;
+  background-color #F6872D;
   color: white;
   font-weight: normal;
 }
 
 .daterangepicker td.active, .daterangepicker td.active:hover {
-  background-color: #F48475
+  background-color: #F6872D
 }
 
 .daterangepicker td.available:hover, .daterangepicker th.available:hover {
@@ -296,7 +296,7 @@ input[name="datefilter"] {
 
 /*검색 돋보기 버튼*/
 .components-user-header__header__searchbar__search-btn {
-  background-color: rgba(244, 132, 117, 1);
+  background-color: #F6872D;
   border-radius: 50%;
   width: 35px;
   height: 35px;

@@ -4,14 +4,14 @@
   height: 25px;
   font-size: 12px;
   border-radius: 5px;
-  background-color: #ffcdc5;
+  background-color: #ffca9f;
   border: none;
   color: #3c3c3c;
   cursor: pointer;
 }
 
 .screens-room-myBookings__button:hover {
-  background-color: #f8a499;
+  background-color: #F6872D;
   color: #FFFFFF;
 }
 
@@ -97,7 +97,7 @@
 }
 
 .screens-room-myBookings__comming-reservation__div__status_id {
-  color: #ed6452;
+  color: #F6872D;
   font-family: NotoSansKR-Bold;
   font-size: 18px;
 }
