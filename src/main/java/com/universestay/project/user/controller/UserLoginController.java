@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Slf4j
@@ -71,6 +74,7 @@ public class UserLoginController {
 
                 // 정상적으로 로그인 됐을 때,
                 userLoginService.userLastLogin(user_email);
+                session.setAttribute("userId", userInfo.getUser_id());
 
                 String currentUri = (String) session.getAttribute("uri");
                 if (currentUri != null && !currentUri.isEmpty()) {
@@ -104,5 +108,14 @@ public class UserLoginController {
 //            return null; // => 리턴 사용 예) 우리가 정의한 에러페이지가 있다면 보여주면 되는데, 없으니까 안 사용
         } // 화면
 
+    }
+
+    @GetMapping("/getUserId")
+    @ResponseBody
+    public String getUserId(HttpSession session) {
+
+        String userId = (String) session.getAttribute("userId");
+
+        return userId;
     }
 }

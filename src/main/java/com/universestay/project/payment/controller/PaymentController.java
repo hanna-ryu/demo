@@ -14,18 +14,16 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Map;
 import java.util.UUID;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/payment")
@@ -211,6 +209,8 @@ public class PaymentController {
     @PostMapping("/saveResponse")
     @ResponseBody
     public ResponseEntity getPaymentResponse(@RequestBody PaymentDto paymentDto) {
+        System.out.println("paymentDto >>" + paymentDto);
+
         try {
             String uuid = UUID.randomUUID().toString();
             //payment_id에 랜덤 Uuid 부여
@@ -349,6 +349,7 @@ public class PaymentController {
 
         return new ResponseEntity(HttpStatus.OK);
     }
+
 
 
 }

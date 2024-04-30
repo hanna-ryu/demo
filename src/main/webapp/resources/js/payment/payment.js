@@ -10,116 +10,168 @@ const bookingIdArray = document.querySelectorAll(
 for (let i = 0; i < cardPaymentButtons.length; i++) {
     cardPaymentButtons[i].addEventListener("click", function (ev) {
         const bookingId = bookingIdArray[i].dataset.value;
+        console.log("bookingId >> " + bookingId);
 
-        // 초기 필요한 데이터 가져오기
-        $.ajax({
-            url: "/payment/getPaymentInfo",
-            method: "post",
-            dataType: "json",
-            data: {bookingId: bookingId},
-            success: function (res) {
-                const randomUUID = generateUUID();
+        var result = confirm("결제하시겠습니까? ?");
 
-                IMP.request_pay({
-                    pg: "kcp",
-                    pay_method: "card",
-                    merchant_uid: randomUUID,   // 주문번호는 결제창 요청 시 항상 고유 값으로 채번 되어야 합니다.
-                    name: res.room_name,
-                    amount: res.booking_total_pay_amount,                         // 숫자 타입
-                    buyer_email: res.user_email,
-                    buyer_name: res.user_name,
-                    buyer_tel: res.user_phone_num1,
-                    custom_data: {
-                        booking_id: bookingId
-                    }
-                }, function (rsp) {
-                    // 결제 성공 시
-                    if (rsp.success) {
-                        const paymentDto = {
-                            booking_id: rsp.custom_data.booking_id,
-                            payment_is_success: rsp.success,
-                            payment_apply_num: rsp.apply_num,
-                            payment_buyer_name: rsp.buyer_name,
-                            payment_buyer_addr: rsp.buyer_addr,
-                            payment_buyer_email: rsp.buyer_email,
-                            payment_buyer_postcode: rsp.buyer_postcode,
-                            payment_buyer_tel: rsp.buyer_tel,
-                            payment_imp_uid: rsp.imp_uid,
-                            payment_merchant_uid: rsp.merchant_uid,
-                            payment_name: rsp.name,
-                            payment_paid_amount: rsp.paid_amount,
-                            payment_paid_at: rsp.paid_at,
-                            payment_pay_method: rsp.pay_method,
-                            payment_pg_provider: rsp.pg_provider,
-                            payment_pg_tid: rsp.pg_tid,
-                            payment_pg_type: rsp.pg_type,
-                            payment_receipt_url: rsp.receipt_url,
-                            payment_status: rsp.status,
-                            payment_currency: rsp.currency,
-                            payment_card_name: rsp.card_name,
-                            payment_bank_name: rsp.bank_name,
-                            payment_card_quota: rsp.card_quota,
-                            payment_card_number: rsp.card_number
-                        }
-
-                        let payment_id = "";
-                        $.ajax({
-                            url: "/payment/saveResponse",
-                            method: "post",
-                            contentType: "application/json",
-                            data: JSON.stringify(paymentDto),
-                            success: function (res) {
-                                payment_id = res;
-
-                                const imp_uid = rsp.imp_uid;
-                                const merchant_uid = rsp.merchant_uid;
-                                // 엑세스 토큰(access token) 발급 받기
-                                $.ajax({
-                                    url: "/payment/getAccessToken",
-                                    method: "post",
-                                    dataType: "json",
-                                    success: function (res) {
-                                        const access_token = res.response.access_token;
-
-                                        // 결제 검증, imp_uid로 포트원 서버에서 결제 정보 조회
-                                        $.ajax({
-                                            url: "/payment/lookUpImpUid",
-                                            method: "post",
-                                            data: {
-                                                imp_uid: imp_uid,
-                                                Authorization: access_token,
-                                                booking_id: rsp.custom_data.booking_id,
-                                                payment_id: payment_id
-                                            },
-                                            success: function (res) {
-                                                alert("결제가 정상 처리되었습니다.");
-                                                window.location.reload(true);
-                                            },
-                                            error: function (res) {
-                                                alert(res);
-                                            },
-                                        });
-                                    },
-                                })
-
-                            }, error: function (res) {
-                                console.log(res);
-                            }
-                        })
-
-                    } else {
-                        alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
-                    }
-                });
-
-            },
-            error: function (res) {
-                console.log(res);
-            },
-        });
-
+        if (result) {
+            // 결제 정보를 바로 저장하는 함수 호출
+            getUserIdFromServer(function(userId) {
+                savePaymentInfo(bookingId, userId);
+            });
+        } else {
+            alert("결제를 취소하였습니다.");
+            console.log("결제를 취소하였습니다.");
+        }
     });
 }
+
+function getUserIdFromServer(callback) {
+    $.ajax({
+        url: "/user/getUserId",
+        method: "get",
+        success: function (userId) {
+            callback(userId);
+        },
+        error: function (xhr, status, error) {
+            var errorMessage = xhr.responseText;
+            console.error("서버에서 오류가 발생하였습니다:", errorMessage);
+        },
+    });
+}
+
+function savePaymentInfo(bookingId, userId) {
+    $.ajax({
+        url: "/payment/saveResponse",
+        method: "post",
+        contentType: "application/json",
+        data: JSON.stringify({ booking_id: bookingId, user_id: userId }),
+        success: function (res) {
+            alert("결제가 정상 처리되었습니다.");
+            window.location.reload(true);
+
+        },
+        error: function (xhr, status, error) {
+                    var errorMessage = xhr.responseText;
+                    console.error("서버에서 오류가 발생하였습니다:", errorMessage);
+        },
+    });
+}
+
+//for (let i = 0; i < cardPaymentButtons.length; i++) {
+//    cardPaymentButtons[i].addEventListener("click", function (ev) {
+//        const bookingId = bookingIdArray[i].dataset.value;
+//
+//        // 초기 필요한 데이터 가져오기
+//        $.ajax({
+//            url: "/payment/getPaymentInfo",
+//            method: "post",
+//            dataType: "json",
+//            data: {bookingId: bookingId},
+//            success: function (res) {
+//                const randomUUID = generateUUID();
+//
+//                IMP.request_pay({
+//                    pg: "kcp",
+//                    pay_method: "card",
+//                    merchant_uid: randomUUID,   // 주문번호는 결제창 요청 시 항상 고유 값으로 채번 되어야 합니다.
+//                    name: res.room_name,
+//                    amount: res.booking_total_pay_amount,                         // 숫자 타입
+//                    buyer_email: res.user_email,
+//                    buyer_name: res.user_name,
+//                    buyer_tel: res.user_phone_num1,
+//                    custom_data: {
+//                        booking_id: bookingId
+//                    }
+//                }, function (rsp) {
+//                    // 결제 성공 시
+//                    if (rsp.success) {
+//                        const paymentDto = {
+//                            booking_id: rsp.custom_data.booking_id,
+//                            payment_is_success: rsp.success,
+//                            payment_apply_num: rsp.apply_num,
+//                            payment_buyer_name: rsp.buyer_name,
+//                            payment_buyer_addr: rsp.buyer_addr,
+//                            payment_buyer_email: rsp.buyer_email,
+//                            payment_buyer_postcode: rsp.buyer_postcode,
+//                            payment_buyer_tel: rsp.buyer_tel,
+//                            payment_imp_uid: rsp.imp_uid,
+//                            payment_merchant_uid: rsp.merchant_uid,
+//                            payment_name: rsp.name,
+//                            payment_paid_amount: rsp.paid_amount,
+//                            payment_paid_at: rsp.paid_at,
+//                            payment_pay_method: rsp.pay_method,
+//                            payment_pg_provider: rsp.pg_provider,
+//                            payment_pg_tid: rsp.pg_tid,
+//                            payment_pg_type: rsp.pg_type,
+//                            payment_receipt_url: rsp.receipt_url,
+//                            payment_status: rsp.status,
+//                            payment_currency: rsp.currency,
+//                            payment_card_name: rsp.card_name,
+//                            payment_bank_name: rsp.bank_name,
+//                            payment_card_quota: rsp.card_quota,
+//                            payment_card_number: rsp.card_number
+//                        }
+//
+//                        let payment_id = "";
+//                        $.ajax({
+//                            url: "/payment/saveResponse",
+//                            method: "post",
+//                            contentType: "application/json",
+//                            data: JSON.stringify(paymentDto),
+//                            success: function (res) {
+//                                payment_id = res;
+//
+//                                const imp_uid = rsp.imp_uid;
+//                                const merchant_uid = rsp.merchant_uid;
+//                                // 엑세스 토큰(access token) 발급 받기
+//                                $.ajax({
+//                                    url: "/payment/getAccessToken",
+//                                    method: "post",
+//                                    dataType: "json",
+//                                    success: function (res) {
+//                                        const access_token = res.response.access_token;
+//
+//                                        // 결제 검증, imp_uid로 포트원 서버에서 결제 정보 조회
+//                                        $.ajax({
+//                                            url: "/payment/lookUpImpUid",
+//                                            method: "post",
+//                                            data: {
+//                                                imp_uid: imp_uid,
+//                                                Authorization: access_token,
+//                                                booking_id: rsp.custom_data.booking_id,
+//                                                payment_id: payment_id
+//                                            },
+//                                            success: function (res) {
+//                                                alert("결제가 정상 처리되었습니다.");
+//                                                window.location.reload(true);
+//                                            },
+//                                            error: function (res) {
+//                                                alert(res);
+//                                            },
+//                                        });
+//                                    },
+//                                })
+//
+//                            }, error: function (res) {
+//                                console.log(res);
+//                            }
+//                        })
+//
+//                    } else {
+//                        alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
+//
+//                    }
+//                });
+//
+//            },
+//            error: function (res) {
+//                console.log(res);
+//            },
+//        });
+//
+//    });
+//}
 
 // 카카오페이 결제
 const kakaoPaymentButtons = document.querySelectorAll(

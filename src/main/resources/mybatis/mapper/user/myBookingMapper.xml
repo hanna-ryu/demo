@@ -26,12 +26,7 @@
         b.is_user_review,
         b.created_at,
         p.payment_id,
-        p.booking_id,
-        p.payment_is_success,
-        p.payment_paid_amount,
-        p.payment_status,
-        p.payment_pg_provider,
-        p.payment_is_approved
+        p.booking_id
         from Room r
         join Booking b on r.room_id = b.room_id
         join User u on u.user_id = b.user_id

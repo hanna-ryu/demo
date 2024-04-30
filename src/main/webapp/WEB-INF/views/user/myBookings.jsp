@@ -106,10 +106,10 @@
                                         <c:when test="${dto.booking_status_id == 'B01'}">
                                             승인 대기
                                         </c:when>
-                                        <c:when test="${dto.booking_status_id == 'B02' && (dto.payment_id == null || dto.payment_is_approved == null || dto.payment_is_approved == 'N')}">
+                                        <c:when test="${dto.booking_status_id == 'B02' && dto.payment_id == null}">
                                             결제 대기
                                         </c:when>
-                                        <c:when test="${dto.booking_status_id == 'B02' && dto.payment_id != null && dto.payment_is_approved != null && dto.payment_is_approved == 'Y'}">
+                                        <c:when test="${dto.booking_status_id == 'B02' && dto.payment_id != null}">
                                             결제 완료
                                         </c:when>
                                         <c:when test="${dto.booking_status_id == 'B03'}">
@@ -153,9 +153,11 @@
                                     <button class="screens-room-myBookings__payment-button-card screens-room-myBookings__button">
                                         카드결제
                                     </button>
+                                    <%--
                                     <button class="screens-room-myBookings__payment-button-kakao screens-room-myBookings__button">
                                         카카오페이
                                     </button>
+                                    --%>
                                     <button class="screens-room-myBookings__cancel-button screens-room-myBookings__button">
                                         예약 취소
                                     </button>
