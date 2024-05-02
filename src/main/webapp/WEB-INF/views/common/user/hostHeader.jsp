@@ -214,5 +214,6 @@
 </script>
 <%--위 까지 common 헤더--%>
 <%--<script src="/resources/js/room/roomManagement.js"></script>--%>
+<script type="text/javascript" src="//cdn.evgnet.com/beacon/cloviscoltd/world_tour_2024/scripts/evergage.min.js"></script>
 </body>
 </html>

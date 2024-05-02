@@ -239,7 +239,6 @@
 </header>
 <div class="components-user-header__line"></div>
 
-
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
@@ -248,6 +247,7 @@
 <script type="text/javascript"
         src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <script src="/resources/js/user/common/header.js"></script>
+<script type="text/javascript" src="//cdn.evgnet.com/beacon/cloviscoltd/world_tour_2024/scripts/evergage.min.js"></script>
 <script>
     //---------------------- 캘린더 라이브러리 --------------------------------------------
     $(function () {
