@@ -108,4 +108,7 @@ public class RoomDto {
     @ApiModelProperty(notes = "최종등록자 ID", example = "0ca24692-89ea-11ee-b9d1-0242ac120002", required = true)
     private String updated_id;
 
+    @ApiModelProperty(notes = "지역", example = "서울특별시", required = false)
+    private Double room_city;
+
 }

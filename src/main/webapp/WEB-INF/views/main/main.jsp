@@ -53,6 +53,8 @@
     }
 
     const statusId = "${statusId}";
+
+
     if (statusId == "U02") {
         alert("현재 휴면 상태입니다. 해제 하시겠습니까?");
     }
@@ -76,7 +78,14 @@
             e.stopPropagation();
             // 변수 선언
             // roomID는 list의 각 value값을 가져옴
-            const roomID = $(this).val();
+            data = $(this).val().split(",");
+            const roomID = data[0];
+            const roomCity = data[1];
+
+            console.log("data >> " + $(this).val());
+            console.log("roomID >> " + roomID);
+            console.log("roomCity >> " + roomCity);
+
             button = $(this);
 
             // WishList ajax
@@ -84,7 +93,7 @@
                 url: "/user/myPage/wishLists/active",
                 type: "POST",
                 dataType: "text",
-                data: {room_id: roomID},
+                data: {room_id: roomID, room_city: roomCity},
                 success: function (response) {
                     $('.modal-div').finish();
                     if (response === 'DEL_OK') {
@@ -93,10 +102,22 @@
                         $('.modal-div h4').text('위시리스트에서 삭제되었습니다.')
                         $("#" + roomID).fadeIn('slow').delay(3000).fadeOut('slow');
                     } else if (response === 'IST_OK') {
+
                         button.toggleClass(
                                 'screens-user-main__wishlist__not_wished screens-user-main__wishlist__wished');
                         $('.modal-div h4').text('위시리스트에 추가되었습니다.')
                         $("#" + roomID).fadeIn('slow').delay(3000).fadeOut('slow');
+                        alert("유저 이메일 : ${userInfo.user_email}\n룸 지역 : " + roomCity);
+
+                        var popupW = 800;
+                        var popupH = 400;
+                        var popLeft = Math.ceil((window.screen.width - popupW)/2);
+                        var popTop = Math.ceil((window.screen.height - popupH)/2);
+
+                        //MC Cloud Page로 리다이렉트
+                        window.open("https://mc7ccd76-999rb-5nxks3yj-r068.pub.sfmc-content.com/0pjrelrrf5f?email=${userInfo.user_email}&wishlist=" + roomCity, "popup",
+                                    "width="+popupW+",height="+popupH+",left="+popLeft+",top="+popTop+",scrollbars=yes,resizable=no,toolbar=no,titlebar=no,menubar=no,location=no")
+
                     } else {
                         alert("로그인이 필요합니다.");
                         location.href = "/user/loginForm";
@@ -135,7 +156,6 @@
                     } else {
                         wished = "<button class='screens-user-main__wishlist__wished' value=";
                     }
-
                     $(".screens-user-main__main__wrapper").append(
                             '<div class="screens-user-main__room__wrapper" value="'
                             + room.room_id
@@ -170,7 +190,7 @@
                             + '</span>'
                             + '<form class="screens-user-main__wishlist">'
                             + wished
-                            + room.room_id
+                            + room.room_id + "," + room.room_city
                             + '>' + '</button>'
                             + '</form>'
                             + '</div>'

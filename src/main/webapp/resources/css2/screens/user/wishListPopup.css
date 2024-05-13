@@ -1,0 +1,46 @@
+.popBackground {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.popUpContent {
+    text-align: center;
+    padding-top: 60px;
+}
+
+.logoImg{
+    margin-bottom: 40px;
+}
+
+.logoImg > img{
+    width: 300px;
+}
+
+.info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.infoTitle {
+    display: flex;
+    width: 140px;
+    height: 26px;
+    border: 1px solid #F6872D;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    color: #F6872D;
+    font-weight: bold;
+}
+
+.infoContent {
+    margin-bottom: 20px;
+}
+
+.check {
+    font-size: 14px;
+}
+

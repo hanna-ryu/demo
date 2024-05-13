@@ -73,8 +73,7 @@ $(document).ready(function () {
             //         ".screens-user-join_dropdown__textBox").val();
 
             const user_email = $("#screens-user-join_signup_email").val();
-            const user_phone_num1 = $(
-                    "#screens-user-join_signup_phone_1").val();
+            const user_phone_num1 = $("#screens-user-join_signup_phone_1").val();
             // const user_phone_num2 = $(
             //         "#screens-user-join_signup_phone_2").val();
             // const address = $("#screens-user-join_address_roadAddress").val();
@@ -104,6 +103,7 @@ $(document).ready(function () {
                 success: function (response) {
                     if (response == 1) {
                         alert("회원가입에 성공하였습니다.");
+
                         location.href = "/user/loginForm";
                     } else {
                         alert("회원가입에 실패하였습니다.");
@@ -111,7 +111,7 @@ $(document).ready(function () {
                     }
                 },
                 error: function (error) {
-                    console.error("가입 실패:", error);
+                    alert("중복된 이메일이 존재합니다.");
                 }
             });
         }

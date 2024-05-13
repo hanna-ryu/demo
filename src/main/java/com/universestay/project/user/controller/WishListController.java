@@ -51,8 +51,11 @@ public class WishListController {
     }
 
     @PostMapping("/active")
-    public ResponseEntity<String> insert(String room_id, WishListDto wishListDto,
-                                         HttpSession session) {
+    public ResponseEntity<String> insert(String room_id,String room_city, WishListDto wishListDto,
+                                         HttpSession session, Model model) {
+
+        System.out.println("room_city >> " + room_city);
+
         try {
             String user_email = (String) session.getAttribute("user_email");
             String user_id = wishListService.getUserUuid(user_email);
@@ -77,7 +80,11 @@ public class WishListController {
                     wishListDto.setCreated_id(user_id);
                     wishListDto.setUpdated_id(user_id);
                     wishListService.insert(wishListDto);
+                    model.addAttribute("roomCity", room_city);
+
+                    System.out.println("exception1");
                     return ResponseEntity.ok("IST_OK");
+
                 } catch (Exception IstErr) {
                     IstErr.printStackTrace();
                     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("IST_ERR");
@@ -88,5 +95,6 @@ public class WishListController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("NOT_LOGGED_IN");
         }
     }
+
 
 }

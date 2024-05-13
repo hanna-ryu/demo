@@ -340,3 +340,14 @@ const signInBtn = document.querySelector(
         ".components-user-header__dropdown__option-sign-in");
 const logOutBtn = document.querySelector(
         ".components-user-header__dropdown__option-log-out");
+
+
+//헤더 쿠폰 배너
+//document.addEventListener("DOMContentLoaded", function() {
+//    var bannerImage = document.querySelector(".bannerImage");
+//
+//    bannerImage.addEventListener("click", function() {
+//        alert("쿠폰이 발급되었습니다.");
+//        location.href = "/";
+//    });
+//});

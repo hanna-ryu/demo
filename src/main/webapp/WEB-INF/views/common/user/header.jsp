@@ -17,6 +17,10 @@
     <title>header</title>
 </head>
 <body>
+<div class="headerBanner">
+    <img class="bannerImage"
+                     src="/resources/img/logo/Banner.png"/>
+</div>
 <header class="components-user-header__header">
     <div class="components-user-header__header__inner">
 
@@ -277,6 +281,15 @@
                                     'YYYY/MM/DD'));
                 });
     });
+
+
+    //배너 이미지 클릭 시
+    var userEmail = '<%= session.getAttribute("user_email") %>';
+    document.querySelector(".bannerImage").addEventListener("click", function() {
+
+        alert("쿠폰이 발급되었습니다.\n유저 이메일: " + userEmail);
+    });
+
 </script>
 
 
